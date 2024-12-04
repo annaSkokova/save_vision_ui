@@ -1,0 +1,10 @@
+@import "../../../styles/variables";
+
+.container {
+  background-color: $menuBg;
+  border-radius: 8px;
+  padding: $mainGap;
+  & > * {
+    width: 100%;
+  }
+}

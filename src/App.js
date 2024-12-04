@@ -1,65 +1,49 @@
-import React from "react";
+
+import { Route, Routes } from 'react-router-dom';
+import './App.scss';
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Reports from "./pages/Reports/Reports";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import Settings from "./pages/Settings/Settings";
+import Violations from "./pages/Violations/Violations";
+import NoMatch from "./pages/NoMatch/NoMatch";
+import Menu from "./components/Menu/Menu";
+import {Box, Grid2} from "@mui/material";
+import {ThemeProvider} from '@mui/material/styles';
+import CameraList from "./pages/CameraList/CameraList";
+import {theme} from "./variables";
+import CameraEditCreate from "./pages/CameraEditCreate/CameraEditCreate";
 
 
-import './App.css';
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
-
-
-export default function App() {
+function App() {
   return (
-    <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-          </ul>
-        </nav>
-
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/users">
-            <Users />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
+    <ThemeProvider
+      theme={theme}
+    >
+      <div className="App">
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid2 container spacing={1}>
+            <Grid2 item size={2}>
+              <Menu/>
+            </Grid2>
+            <Grid2 item size={10}>
+              <div className="content_wrapper">
+                <Routes>
+                  <Route path='/' element={<Dashboard/>}/>
+                  <Route path='/reports' element={<Reports/>}/>
+                  <Route path='/setting' element={<Settings/>}/>
+                  <Route path='/violations' element={<Violations/>}/>
+                  <Route path='/cameras' element={<CameraList/>}/>
+                  <Route path="/cameras/:id" element={<CameraEditCreate />} />
+                  <Route path="/cameras/create" element={<CameraEditCreate />} />
+                  <Route path="*" element={<NoMatch />} />
+                </Routes>
+              </div>
+            </Grid2>
+          </Grid2>
+        </Box>
       </div>
-    </Router>
+    </ThemeProvider>
   );
 }
 
-function Home() {
-  return <h2>Home</h2>;
-}
-
-function About() {
-  return <h2>About</h2>;
-}
-
-function Users() {
-  return <h2>Users</h2>;
-}
+export default App;

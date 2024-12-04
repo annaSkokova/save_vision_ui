@@ -1,0 +1,22 @@
+@import "styles/fonts.scss";
+@import "styles/variables.scss";
+
+body {
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    background-color: $darkBlue;
+}
+
+.content_wrapper {
+    padding: $mainGap $mainGapHalf ;
+    height: 100%;
+}
+
+.ytp-chrome-top {
+    display: none!important;
+}
+
+@media print {
+    .no-printme  { display: none;}
+    .printme  { display: block;}
+}
